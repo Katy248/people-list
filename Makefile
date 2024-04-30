@@ -2,8 +2,9 @@ MAKE_FILES := $(wildcard ./scripts/make/*.mk)
 
 all:
 
-serve:
+include .env $(MAKE_FILES)
+
+serve: build
 	php -S localhost:8080 -t public/
 
-include $(MAKE_FILES)
 
