@@ -49,5 +49,4 @@ function validate($data): bool
         array_push($errors, new KeyValue('phone_error', 'Field cannot be empty'));
     }
     return count($errors) > 0;
-
 }

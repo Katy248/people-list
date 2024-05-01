@@ -1,5 +1,6 @@
 <?php include ('components/header.php'); ?>
 <?php include ('database.php'); ?>
+<?php include ('people.php'); ?>
 
 <h1>People</h1>
 <table>
@@ -9,6 +10,9 @@
         </th>
         <th>
             First name
+        </th>
+        <th>
+            Last name
         </th>
         <th>
             Phone
@@ -22,32 +26,30 @@
     </thead>
     <tbody>
         <?php
-        $query = 'SELECT * FROM `people`';
-        $result = mysqli_query($connection, $query);
 
-        if (!$result) {
-            die('Query error');
-        } else {
-            while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                                                <th>
-                                                    <?php echo $row['id'] ?>
-                                                </th>
-                                                <th>
-                                                    <?php echo $row['first_name'] ?>
-                                                </th>
-                                                <th>
-                                                    <?php echo $row['phone'] ?>
-                                                </th>
-                                                <th>
-                                                    <?php echo $row['creation'] ?>
-                                                </th>
-                                                <th>
-                                                    <?php echo $row['last_edit'] ?>
-                                                </th>
-                                                <?php
-            }
+        foreach (get_people($connection) as $human) {
+            ?>
+                                <th>
+                                    <?php echo $human->id ?>
+                                </th>
+                                <th>
+                                    <?php echo $human->first_name ?>
+                                </th>
+                                <th>
+                                    <?php echo $human->last_name ?>
+                                </th>
+                                <th>
+                                    <?php echo $human->phone ?>
+                                </th>
+                                <th>
+                                    <?php echo $human->creation ?>
+                                </th>
+                                <th>
+                                    <?php echo $human->last_edit ?>
+                                </th>
+                                <?php
         }
+
         ?>
     </tbody>
 </table>
